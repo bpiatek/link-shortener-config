@@ -1,19 +1,24 @@
 server:
   port: 8080
 
+
 spring:
   cloud:
     gateway:
-      routes:
-        - id: kafka_producer_route
-          uri: lb://kafka-producer-dev-helm
-          predicates:
-            - Path=/producer/**
+      server:
+        webflux:
+          routes:
+            # Route to the kafka-producer service
+            - id: kafka_producer_route
+              uri: lb://kafka-producer-dev-helm
+              predicates:
+                - Path=/producer/**
 
-        - id: kafka_consumer_route
-          uri: lb://kafka-consumer-dev-helm
-          predicates:
-            - Path=/consumer/**
+            # Route to the kafka-consumer service
+            - id: kafka_consumer_route
+              uri: lb://kafka-consumer-dev-helm
+              predicates:
+                - Path=/consumer/**
 
 management:
   endpoints:
