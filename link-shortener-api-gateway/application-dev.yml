@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: kafka_producer_route
+          uri: lb://kafka-producer-dev-helm
+          predicates:
+            - Path=/producer/**
+
+        - id: kafka_consumer_route
+          uri: lb://kafka-consumer-dev-helm
+          predicates:
+            - Path=/consumer/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
