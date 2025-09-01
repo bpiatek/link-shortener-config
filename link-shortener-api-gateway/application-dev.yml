@@ -13,6 +13,8 @@ spring:
               uri: lb://kafka-producer-dev-helm:8080
               predicates:
                 - Path=/producer/**
+              filters:
+                - StripPrefix=1
 
             # Route to the kafka-consumer service
             - id: kafka_consumer_route
