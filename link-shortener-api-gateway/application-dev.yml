@@ -10,13 +10,13 @@ spring:
           routes:
             # Route to the kafka-producer service
             - id: kafka_producer_route
-              uri: lb://kafka-producer-dev-helm
+              uri: lb://kafka-producer-dev-helm:8080
               predicates:
                 - Path=/producer/**
 
             # Route to the kafka-consumer service
             - id: kafka_consumer_route
-              uri: lb://kafka-consumer-dev-helm
+              uri: lb://kafka-consumer-dev-helm:8008
               predicates:
                 - Path=/consumer/**
 
