@@ -7,21 +7,21 @@ spring:
           predicates:
             - Path=/producer/**
           filters:
-            - StripPrefix=1
+            - RewritePath=/producer/(?<segment>.*), /$\{segment}
 
         - id: kafka_consumer_route
           uri: lb://kafka-consumer-dev-helm:8008
           predicates:
             - Path=/consumer/**
           filters:
-            - StripPrefix=1
+            - RewritePath=/consumer/(?<segment>.*), /$\{segment}
 
         - id: user_service_route
           uri: lb://link-shortener-user-service-dev-helm:8008
           predicates:
             - Path=/user/**
           filters:
-            - StripPrefix=1
+            - RewritePath=/user/(?<segment>.*), /$\{segment}
 
 management:
   endpoints:
