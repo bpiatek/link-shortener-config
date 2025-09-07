@@ -1,4 +1,7 @@
 spring:
+  threads:
+    virtual:
+      enabled: true
   cloud:
     gateway:
       routes:
@@ -27,4 +30,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,prometheus
+        include: health,prometheus,gateway
