@@ -2,7 +2,10 @@ spring:
   threads:
     virtual:
       enabled: true
-  cloud:
+  boot:
+    admin:
+      client:
+        url: http://link-shortener-spring-admin-dev-helm:8080
     gateway:
       server:
         webmvc:
@@ -32,4 +35,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,prometheus,gateway
+        include: "*"
