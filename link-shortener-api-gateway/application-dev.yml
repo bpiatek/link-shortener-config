@@ -10,7 +10,6 @@ spring:
   boot:
     admin:
       client:
-        url: http://link-shortener-spring-admin-dev-helm:8080
         username: ${monitoring.user.name}
         password: ${monitoring.user.password}
         instance:
