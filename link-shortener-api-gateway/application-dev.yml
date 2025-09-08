@@ -1,3 +1,8 @@
+monitoring:
+  user:
+    name: bpiatek
+    password: dupa1234
+
 spring:
   threads:
     virtual:
@@ -6,6 +11,13 @@ spring:
     admin:
       client:
         url: http://link-shortener-spring-admin-dev-helm:8080
+        username: ${monitoring.user.name}
+        password: ${monitoring.user.password}
+        instance:
+          service-url: http://link-shortener-api-gateway-dev-helm:80
+          metadata:
+            user.name: ${monitoring.user.name}
+            user.password: ${monitoring.user.password}
     gateway:
       server:
         webmvc:
@@ -36,3 +48,6 @@ management:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
