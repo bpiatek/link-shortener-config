@@ -17,6 +17,7 @@ spring:
           metadata:
             user.name: ${monitoring.user.name}
             user.password: ${monitoring.user.password}
+  cloud:
     gateway:
       server:
         webmvc:
