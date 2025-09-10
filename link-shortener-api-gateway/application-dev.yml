@@ -23,25 +23,30 @@ spring:
         webmvc:
           routes:
             - id: kafka_producer_route
-              uri: lb://kafka-producer-dev-helm:8080
+              uri: lb://kafka-producer-dev-helm
               predicates:
                 - Path=/producer/**
               filters:
                 - StripPrefix=1
 
             - id: kafka_consumer_route
-              uri: lb://kafka-consumer-dev-helm:8008
+              uri: lb://kafka-consumer-dev-helm
               predicates:
                 - Path=/consumer/**
               filters:
                 - StripPrefix=1
 
             - id: user_service_route
-              uri: lb://link-shortener-user-service-dev-helm:8008
+              uri: lb://link-shortener-user-service-dev-helm
               predicates:
                 - Path=/user/**
               filters:
                 - StripPrefix=1
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://link-shortener-user-service-dev-helm.dev.svc.cluster.local:8080/.well-known/jwks.json"
 
 management:
   endpoints:
