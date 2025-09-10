@@ -49,10 +49,9 @@ spring:
           jwk-set-uri: "http://link-shortener-user-service-dev-helm.dev.svc.cluster.local:8080/.well-known/jwks.json"
 server:
   undertow:
-    worker-threads: 0   # 0 = use virtual threads
-    io-threads: 2       # can adjust if needed
-    buffers-per-region: 1024
-    
+    worker-threads: 0
+    io-threads: 2
+
 management:
   endpoints:
     web:
