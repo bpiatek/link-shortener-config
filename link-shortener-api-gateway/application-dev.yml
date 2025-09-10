@@ -56,3 +56,5 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+    env:
+      show-values: ALWAYS
