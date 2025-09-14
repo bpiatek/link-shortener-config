@@ -1,8 +1,3 @@
-monitoring:
-  user:
-    name: bpiatek
-    password: dupa1234
-
 spring:
   threads:
     virtual:
