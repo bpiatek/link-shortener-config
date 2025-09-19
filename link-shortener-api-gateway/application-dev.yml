@@ -34,9 +34,15 @@ spring:
             - id: user_service_route
               uri: lb://link-shortener-user-service-dev-helm:8080
               predicates:
-                - Path=/user/**
+                - Path=/users/**
               filters:
                 - StripPrefix=1
+
+            - id: link_service_route
+              uri: lb://link-shortener-link-service-dev-helm:8080
+              predicates:
+                - Path=/link/**
+
   security:
     oauth2:
       resourceserver:
