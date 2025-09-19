@@ -41,7 +41,7 @@ spring:
             - id: link_service_route
               uri: lb://link-shortener-link-service-dev-helm:8080
               predicates:
-                - Path=/link/**
+                - Path=/links/**
 
   security:
     oauth2:
