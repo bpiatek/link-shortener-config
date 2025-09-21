@@ -17,15 +17,9 @@ spring:
       server:
         webmvc:
           routes:
-            - id: redirect_service_route
-              uri: lb://link-shortener-redirect-service-dev-helm:8080
-              order: 1
-              predicates:
-                # It will match '/aB5xZ1' but NOT '/links/something'
-                - Path=/{shortCode:[a-zA-Z0-9]+}
-
             - id: kafka_producer_route
               uri: lb://kafka-producer-dev-helm:8080
+              order: 1
               predicates:
                 - Path=/producer/**
               filters:
@@ -33,6 +27,7 @@ spring:
 
             - id: kafka_consumer_route
               uri: lb://kafka-consumer-dev-helm:8080
+              order: 1
               predicates:
                 - Path=/consumer/**
               filters:
@@ -40,6 +35,7 @@ spring:
 
             - id: user_service_route
               uri: lb://link-shortener-user-service-dev-helm:8080
+              order: 1
               predicates:
                 - Path=/users/**
               filters:
@@ -47,8 +43,16 @@ spring:
 
             - id: link_service_route
               uri: lb://link-shortener-link-service-dev-helm:8080
+              order: 1
               predicates:
                 - Path=/links/**
+
+            - id: redirect_service_route
+              uri: lb://link-shortener-redirect-service-dev-helm:8080
+              order: 100
+              predicates:
+                # It will match '/aB5xZ1' but NOT '/links/something'
+                - Path=/{shortCode:[a-zA-Z0-9]+}
 
   security:
     oauth2:
