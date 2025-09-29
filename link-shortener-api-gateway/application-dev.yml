@@ -59,6 +59,11 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: "http://link-shortener-user-service-dev-helm.dev.svc.cluster.local:8080/.well-known/jwks.json"
+server:
+  undertow:
+    threads:
+      worker: 0
+      io: 2
 
 management:
   endpoints:
