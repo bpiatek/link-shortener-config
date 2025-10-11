@@ -52,8 +52,6 @@ spring:
               order: 1
               predicates:
                 - Path=/dashboard/**
-              filters:
-                - StripPrefix=1
 
             - id: redirect_service_route
               uri: lb://link-shortener-redirect-service-dev-helm:8080
