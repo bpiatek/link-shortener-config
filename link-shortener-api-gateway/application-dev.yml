@@ -53,6 +53,12 @@ spring:
               predicates:
                 - Path=/dashboard/**
 
+            - id: notification_service_route
+              uri: lb://link-shortener-notification-service-dev-helm:8080
+              order: 1
+              predicates:
+                - Path=/notifications/**
+
             - id: redirect_service_route
               uri: lb://link-shortener-redirect-service-dev-helm:8080
               order: 100
