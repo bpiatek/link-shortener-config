@@ -95,3 +95,7 @@ management:
       show-details: ALWAYS
     env:
       show-values: ALWAYS
+    logfile:
+      access: read_only
+    configprops:
+      show-values: ALWAYS
