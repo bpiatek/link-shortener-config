@@ -63,8 +63,7 @@ spring:
               uri: lb://link-shortener-redirect-service-dev-helm:8080
               order: 100
               predicates:
-                # It will match '/aB5xZ1' but NOT '/links/something'
-                - Path=/{shortCode:[a-zA-Z0-9]+}
+                - Path=/{shortCode}
 
   security:
     oauth2:
