@@ -1,4 +1,6 @@
 logging:
+  file:
+    name: /tmp/log.log
   level:
     org.springframework.cloud.gateway: DEBUG
     org.springframework.web: DEBUG
@@ -21,6 +23,8 @@ spring:
     gateway:
       server:
         webmvc:
+          not-found-on-dispatch-handler:
+            enabled: true
           routes:
             - id: kafka_producer_route
               uri: lb://kafka-producer-dev-helm:8080
