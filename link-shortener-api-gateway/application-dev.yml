@@ -1,3 +1,8 @@
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web: DEBUG
+
 spring:
   threads:
     virtual:
@@ -63,9 +68,7 @@ spring:
               uri: lb://link-shortener-redirect-service-dev-helm:8080
               order: 100
               predicates:
-                # matches a single path segment
-                # containing any character except a forward slash
-                - Path=/{shortCode:[^/]+}
+                - Path=/{shortCode}
 
   security:
     oauth2:
