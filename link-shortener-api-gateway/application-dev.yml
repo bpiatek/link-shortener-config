@@ -27,29 +27,11 @@ spring:
             # 1. API DOMAIN ROUTES (api.bpiatek.pl)
             # ==========================================
 
-            - id: kafka_producer_route
-              uri: lb://kafka-producer-dev-helm:8080
-              order: 10
-              predicates:
-                - Host=apidev.bpiatek.pl
-                - Path=/producer/**
-              filters:
-                - StripPrefix=1
-
-            - id: kafka_consumer_route
-              uri: lb://kafka-consumer-dev-helm:8080
-              order: 10
-              predicates:
-                - Host=api.bpiatek.pl
-                - Path=/consumer/**
-              filters:
-                - StripPrefix=1
-
             - id: user_service_route
               uri: lb://link-shortener-user-service-dev-helm:8080
               order: 10
               predicates:
-                - Host=api.bpiatek.pl
+                - Host=apidev.bpiatek.pl
                 - Path=/users/**
               filters:
                 - StripPrefix=1
@@ -58,7 +40,7 @@ spring:
               uri: lb://link-shortener-link-service-dev-helm:8080
               order: 10
               predicates:
-                - Host=api.bpiatek.pl
+                - Host=apidev.bpiatek.pl
                 - Path=/links/**
               # Preserved: No StripPrefix based on your previous config
 
@@ -66,14 +48,14 @@ spring:
               uri: lb://link-shortener-dashboard-query-service-dev-helm:8080
               order: 10
               predicates:
-                - Host=api.bpiatek.pl
+                - Host=apidev.bpiatek.pl
                 - Path=/dashboard/**
 
             - id: notification_service_route
               uri: lb://link-shortener-notification-service-dev-helm:8080
               order: 10
               predicates:
-                - Host=api.bpiatek.pl
+                - Host=apidev.bpiatek.pl
                 - Path=/notifications/**
 
             # ==========================================
