@@ -23,52 +23,80 @@ spring:
           not-found-on-dispatch-handler:
             enabled: true
           routes:
+            # ==========================================
+            # 1. API DOMAIN ROUTES (api.bpiatek.pl)
+            # ==========================================
+
             - id: kafka_producer_route
               uri: lb://kafka-producer-dev-helm:8080
-              order: 1
+              order: 10
               predicates:
+                - Host=apidev.bpiatek.pl
                 - Path=/producer/**
               filters:
                 - StripPrefix=1
 
             - id: kafka_consumer_route
               uri: lb://kafka-consumer-dev-helm:8080
-              order: 1
+              order: 10
               predicates:
+                - Host=api.bpiatek.pl
                 - Path=/consumer/**
               filters:
                 - StripPrefix=1
 
             - id: user_service_route
               uri: lb://link-shortener-user-service-dev-helm:8080
-              order: 1
+              order: 10
               predicates:
+                - Host=api.bpiatek.pl
                 - Path=/users/**
               filters:
                 - StripPrefix=1
 
             - id: link_service_route
               uri: lb://link-shortener-link-service-dev-helm:8080
-              order: 1
+              order: 10
               predicates:
+                - Host=api.bpiatek.pl
                 - Path=/links/**
+              # Preserved: No StripPrefix based on your previous config
 
             - id: dashboard_query_service_route
               uri: lb://link-shortener-dashboard-query-service-dev-helm:8080
-              order: 1
+              order: 10
               predicates:
+                - Host=api.bpiatek.pl
                 - Path=/dashboard/**
 
             - id: notification_service_route
               uri: lb://link-shortener-notification-service-dev-helm:8080
+              order: 10
+              predicates:
+                - Host=api.bpiatek.pl
+                - Path=/notifications/**
+
+            # ==========================================
+            # 2. UI SERVICE ROUTES (ls.bpiatek.pl)
+            # ==========================================
+
+            - id: ui_service_route
+              uri: lb://link-shortener-ui-dev-helm:8080
               order: 1
               predicates:
-                - Path=/notifications/**
+                - Host=ls.bpiatek.pl
+                # Explicitly list UI paths to avoid conflict with short codes
+                - Path=/, /login, /register, /verify, /forgot-password, /reset-password, /dashboard/**, /css/**, /js/**, /images/**, /favicon.ico, /error
+
+            # ==========================================
+            # 3. REDIRECT SERVICE (ls.bpiatek.pl Catch-All)
+            # ==========================================
 
             - id: redirect_service_route
               uri: lb://link-shortener-redirect-service-dev-helm:8080
-              order: 100
+              order: 100 # Lowest priority
               predicates:
+                - Host=ls.bpiatek.pl
                 - Path=/{shortCode}
 
   security:
@@ -80,7 +108,7 @@ spring:
 management:
   tracing:
     sampling:
-      probability: 1.0 # Send 100% of traces (reduce this for production, e.g., 0.1)
+      probability: 1.0
     otlp:
       tracing:
         endpoint: http://tempo.observability.svc.cluster.local:4318/v1/traces
