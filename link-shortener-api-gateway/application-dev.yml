@@ -68,7 +68,7 @@ spring:
               predicates:
                 - Host=ls.bpiatek.pl
                 # Explicitly list UI paths to avoid conflict with short codes
-                - Path=/, /login, /logout, /register, /verify, /forgot-password, /reset-password, /dashboard/**, /css/**, /js/**, /images/**, /favicon.ico, /error, /forgot-password-pending, /registration-pending
+                - Path=/, /login, /sign-out, /register, /verify, /forgot-password, /reset-password, /dashboard/**, /css/**, /js/**, /images/**, /favicon.ico, /error, /forgot-password-pending, /registration-pending
 
             # ==========================================
             # 3. REDIRECT SERVICE (ls.bpiatek.pl Catch-All)
