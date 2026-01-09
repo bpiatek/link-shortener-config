@@ -79,7 +79,7 @@ spring:
               order: 100 # Lowest priority
               predicates:
                 - Host=ls.bpiatek.pl
-                - Path=/**
+                - Path=/{shortCode}
 
   security:
     oauth2:
