@@ -28,7 +28,7 @@ spring:
             # 1. API DOMAIN ROUTES (api.bpiatek.pl)
             # ==========================================
             - id: user_service_route
-              uri: http://link-shortener-user-service-dev-helm:80
+              uri: http://link-shortener-user-service-dev-helm:8080
               order: 10
               predicates:
                 - Host=apidev.bpiatek.pl
@@ -37,21 +37,21 @@ spring:
                 - StripPrefix=1
 
             - id: link_service_route
-              uri: http://link-shortener-link-service-dev-helm:80
+              uri: http://link-shortener-link-service-dev-helm:8080
               order: 10
               predicates:
                 - Host=apidev.bpiatek.pl
                 - Path=/links/**
 
             - id: dashboard_query_service_route
-              uri: http://link-shortener-dashboard-query-service-dev-helm:80
+              uri: http://link-shortener-dashboard-query-service-dev-helm:8080
               order: 10
               predicates:
                 - Host=apidev.bpiatek.pl
                 - Path=/dashboard/**
 
             - id: notification_service_route
-              uri: http://link-shortener-notification-service-dev-helm:80
+              uri: http://link-shortener-notification-service-dev-helm:8080
               order: 10
               predicates:
                 - Host=apidev.bpiatek.pl
@@ -61,7 +61,7 @@ spring:
             # 2. UI SERVICE ROUTES (ls.bpiatek.pl)
             # ==========================================
             - id: ui_service_route
-              uri: http://link-shortener-ui-dev-helm:80
+              uri: http://link-shortener-ui-dev-helm:8080
               order: 1
               predicates:
                 - Host=ls.bpiatek.pl
@@ -71,7 +71,7 @@ spring:
             # 3. REDIRECT SERVICE (ls.bpiatek.pl Catch-All)
             # ==========================================
             - id: redirect_service_route
-              uri: http://link-shortener-redirect-service-dev-helm:80
+              uri: http://link-shortener-redirect-service-dev-helm:8080
               order: 100
               predicates:
                 - Host=ls.bpiatek.pl
