@@ -29,7 +29,7 @@ spring:
             # ==========================================
 
             - id: user_service_route
-              uri: lb://link-shortener-user-service-dev-helm:8080
+              uri: http://link-shortener-user-service-dev-helm:8080
               order: 10
               predicates:
                 - Host=apidev.bpiatek.pl
@@ -38,22 +38,21 @@ spring:
                 - StripPrefix=1
 
             - id: link_service_route
-              uri: lb://link-shortener-link-service-dev-helm:8080
+              uri: http://link-shortener-link-service-dev-helm:8080
               order: 10
               predicates:
                 - Host=apidev.bpiatek.pl
                 - Path=/links/**
-              # Preserved: No StripPrefix based on your previous config
 
             - id: dashboard_query_service_route
-              uri: lb://link-shortener-dashboard-query-service-dev-helm:8080
+              uri: http://link-shortener-dashboard-query-service-dev-helm:8080
               order: 10
               predicates:
                 - Host=apidev.bpiatek.pl
                 - Path=/dashboard/**
 
             - id: notification_service_route
-              uri: lb://link-shortener-notification-service-dev-helm:8080
+              uri: http://link-shortener-notification-service-dev-helm:8080
               order: 10
               predicates:
                 - Host=apidev.bpiatek.pl
@@ -64,20 +63,19 @@ spring:
             # ==========================================
 
             - id: ui_service_route
-              uri: lb://link-shortener-ui-dev-helm:8080
+              uri: http://link-shortener-ui-dev-helm:8080
               order: 1
               predicates:
                 - Host=ls.bpiatek.pl
-                # Explicitly list UI paths to avoid conflict with short codes
-                - Path=/, /login, /sign-out, /inactive, /404, /register, /verify, /forgot-password, /reset-password, /dashboard/**, /css/**, /js/**, /images/**, /favicon.ico, /error, /forgot-password-pending, /registration-pending
+                - Path=/,/login,/sign-out,/inactive,/404,/register,/verify,/forgot-password,/reset-password,/dashboard/**,/css/**,/js/**,/images/**,/favicon.ico,/error,/forgot-password-pending,/registration-pending
 
             # ==========================================
             # 3. REDIRECT SERVICE (ls.bpiatek.pl Catch-All)
             # ==========================================
 
             - id: redirect_service_route
-              uri: lb://link-shortener-redirect-service-dev-helm:8080
-              order: 100 # Lowest priority
+              uri: http://link-shortener-redirect-service-dev-helm:8080
+              order: 100
               predicates:
                 - Host=ls.bpiatek.pl
                 - Path=/{shortCode}
