@@ -108,3 +108,8 @@ management:
       access: read_only
     configprops:
       show-values: ALWAYS
+  health:
+    ping:
+      enabled: false
+    diskspace:
+      enabled: false
