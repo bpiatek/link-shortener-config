@@ -13,7 +13,7 @@ spring:
         username: ${monitoring.user.name}
         password: ${monitoring.user.password}
         instance:
-          service-url: http://link-shortener-api-gateway-dev-helm:80
+          service-base-url: http://${POD_IP:localhost}:8080
           metadata:
             user.name: ${monitoring.user.name}
             user.password: ${monitoring.user.password}
